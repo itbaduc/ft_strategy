@@ -39,7 +39,7 @@
         "secret": "",
         "ccxt_config": {},
         "ccxt_async_config": {},
-        "pair_whitelist": ["BTC/USDT:USDT"],
+        "pair_whitelist": ["BTC/USDT:USDT", "ETH/USDT:USDT", "SOL/USDT:USDT"],
         "pair_blacklist": []
     },
     "pairlists": [{ "method": "StaticPairList" }],
@@ -74,8 +74,12 @@
         "live_retrain_hours": 0.05,
         "identifier": "DragonSlackStrategy",
         "feature_parameters": {
-            "include_timeframes": ["30m"],
-            "include_corr_pairlist": ["BTC/USDT:USDT"],
+            "include_timeframes": ["15m"],
+            "include_corr_pairlist": [
+                "BTC/USDT:USDT",
+                "ETH/USDT:USDT",
+                "SOL/USDT:USDT"
+            ],
             "label_period_candles": 20,
             "include_shifted_candles": 2,
             "DI_threshold": 0.9,

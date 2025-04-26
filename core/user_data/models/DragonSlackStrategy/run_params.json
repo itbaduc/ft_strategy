@@ -9,10 +9,12 @@
         "identifier": "DragonSlackStrategy",
         "feature_parameters": {
             "include_timeframes": [
-                "30m"
+                "15m"
             ],
             "include_corr_pairlist": [
-                "BTC/USDT:USDT"
+                "BTC/USDT:USDT",
+                "ETH/USDT:USDT",
+                "SOL/USDT:USDT"
             ],
             "label_period_candles": 20,
             "include_shifted_candles": 2,
@@ -57,11 +59,13 @@
         "continual_learning": false,
         "keras": false
     },
-    "timeframe": "30m",
+    "timeframe": "15m",
     "stake_amount": 50,
     "stake_currency": "USDT",
     "max_open_trades": 10,
     "pairs": [
-        "BTC/USDT:USDT"
+        "BTC/USDT:USDT",
+        "ETH/USDT:USDT",
+        "SOL/USDT:USDT"
     ]
 }

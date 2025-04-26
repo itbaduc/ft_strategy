@@ -1,0 +1,28 @@
+{
+  "strategy_name": "DragonSlackStrategy",
+  "params": {
+    "buy": {},
+    "sell": {},
+    "protection": {},
+    "roi": {
+      "0": 0.078,
+      "179": 0.05,
+      "459": 0.029,
+      "941": 0
+    },
+    "stoploss": {
+      "stoploss": -0.235
+    },
+    "trailing": {
+      "trailing_stop": true,
+      "trailing_stop_positive": 0.012,
+      "trailing_stop_positive_offset": 0.041999999999999996,
+      "trailing_only_offset_is_reached": true
+    },
+    "max_open_trades": {
+      "max_open_trades": 6
+    }
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2025-04-26 04:54:04.786087+00:00"
+}

@@ -18,13 +18,18 @@ class DragonSlackStrategy(IStrategy):
     - Futures isolated margin, tập trung vào 2 trades cùng lúc
     - Mục tiêu: avg 20–30% lợi nhuận mỗi tháng
 
+Backtest cho khung 15m - 
+docker-compose run --rm freqtrade backtesting --strategy-list DragonSlackStrategy --cache none --max-open-trades 10 -p BTC/USDT:USDT ETH/USDT:USDT SOL/USDT:USDT --freqaimodel XGBoostRegressor --config user_data/DragonSlackStrategy.json --enable-position-stacking --timerange 20250101- -i 15m
+
 Result for strategy DragonSlackStrategy
                                                 BACKTESTING REPORT
 ┏━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃          Pair ┃ Trades ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃  Win  Draw  Loss  Win% ┃
 ┡━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ BTC/USDT:USDT │     24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
-│         TOTAL │     24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
+│ SOL/USDT:USDT │    254 │         1.98 │         251.194 │        25.12 │      0:48:00 │  175     0    79  68.9 │
+│ ETH/USDT:USDT │    211 │         2.24 │         235.259 │        23.53 │      0:53:00 │  142     0    69  67.3 │
+│ BTC/USDT:USDT │    251 │         1.26 │         145.526 │        14.55 │      0:57:00 │  141     0   110  56.2 │
+│         TOTAL │    716 │          1.8 │         631.979 │         63.2 │      0:53:00 │  458     0   258  64.0 │
 └───────────────┴────────┴──────────────┴─────────────────┴──────────────┴──────────────┴────────────────────────┘
                                          LEFT OPEN TRADES REPORT
 ┏━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -36,89 +41,96 @@ Result for strategy DragonSlackStrategy
 ┏━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃ Enter Tag ┃ Entries ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃  Win  Draw  Loss  Win% ┃
 ┡━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
-│     OTHER │      24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
-│     TOTAL │      24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
+│     OTHER │     716 │          1.8 │         631.979 │         63.2 │      0:53:00 │  458     0   258  64.0 │
+│     TOTAL │     716 │          1.8 │         631.979 │         63.2 │      0:53:00 │  458     0   258  64.0 │
 └───────────┴─────────┴──────────────┴─────────────────┴──────────────┴──────────────┴────────────────────────┘
-                                               EXIT REASON STATS
-┏━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Exit Reason ┃ Exits ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃  Win  Draw  Loss  Win% ┃
-┡━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ exit_cancel │    24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
-│       TOTAL │    24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
-└─────────────┴───────┴──────────────┴─────────────────┴──────────────┴──────────────┴────────────────────────┘
-                                                           MIXED TAG STATS
-┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃           Enter Tag ┃ Exit Reason ┃ Trades ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃  Win  Draw  Loss  Win% ┃
-┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ ('', 'exit_cancel') │             │     24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
-│               TOTAL │             │     24 │        14.12 │         158.604 │        15.86 │      5:35:00 │   18     0     6  75.0 │
-└─────────────────────┴─────────────┴────────┴──────────────┴─────────────────┴──────────────┴──────────────┴────────────────────────┘
-                   SUMMARY METRICS
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Metric                      ┃ Value                ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
-│ Backtesting from            │ 2025-03-01 00:00:00  │
-│ Backtesting to              │ 2025-04-25 09:30:00  │
-│ Trading Mode                │ Isolated Futures     │
-│ Max open trades             │ 1                    │
-│                             │                      │
-│ Total/Daily Avg Trades      │ 24 / 0.44            │
-│ Starting balance            │ 1000 USDT            │
-│ Final balance               │ 1158.604 USDT        │
-│ Absolute profit             │ 158.604 USDT         │
-│ Total profit %              │ 15.86%               │
-│ CAGR %                      │ 165.64%              │
-│ Sortino                     │ 76.03                │
-│ Sharpe                      │ 5.57                 │
-│ Calmar                      │ 1851.02              │
-│ SQN                         │ 3.21                 │
-│ Profit factor               │ 20.34                │
-│ Expectancy (Ratio)          │ 6.61 (4.84)          │
-│ Avg. daily profit %         │ 0.29%                │
-│ Avg. stake amount           │ 46.165 USDT          │
-│ Total trade volume          │ 24542.9 USDT         │
-│                             │                      │
-│ Best Pair                   │ BTC/USDT:USDT 15.86% │
-│ Worst Pair                  │ BTC/USDT:USDT 15.86% │
-│ Best trade                  │ BTC/USDT:USDT 71.33% │
-│ Worst trade                 │ BTC/USDT:USDT -5.30% │
-│ Best day                    │ 35.49 USDT           │
-│ Worst day                   │ -3.211 USDT          │
-│ Days win/draw/lose          │ 17 / 34 / 3          │
-│ Avg. Duration Winners       │ 6:43:00              │
-│ Avg. Duration Loser         │ 2:10:00              │
-│ Max Consecutive Wins / Loss │ 6 / 2                │
-│ Rejected Entry signals      │ 0                    │
-│ Entry/Exit Timeouts         │ 0 / 0                │
-│                             │                      │
-│ Min balance                 │ 1003.053 USDT        │
-│ Max balance                 │ 1158.604 USDT        │
-│ Max % of account underwater │ 0.30%                │
-│ Absolute Drawdown (Account) │ 0.30%                │
-│ Absolute Drawdown           │ 3.211 USDT           │
-│ Drawdown high               │ 78.739 USDT          │
-│ Drawdown low                │ 75.528 USDT          │
-│ Drawdown Start              │ 2025-03-20 00:30:00  │
-│ Drawdown End                │ 2025-03-23 21:30:00  │
-│ Market change               │ -0.76%               │
-└─────────────────────────────┴──────────────────────┘
+                                                  EXIT REASON STATS
+┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Exit Reason ┃ Exits ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃  Win  Draw  Loss  Win% ┃
+┡━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
+│                roi │   204 │         7.47 │         743.737 │        74.37 │      0:53:00 │  204     0     0   100 │
+│ trailing_stop_loss │   245 │         3.68 │         438.156 │        43.82 │      0:51:00 │  227     0    18  92.7 │
+│          stop_loss │     4 │       -24.33 │         -47.684 │        -4.77 │      0:11:00 │    0     0     4     0 │
+│        exit_cancel │   263 │        -3.95 │        -502.231 │       -50.22 │      0:55:00 │   27     0   236  10.3 │
+│              TOTAL │   716 │          1.8 │         631.979 │         63.2 │      0:53:00 │  458     0   258  64.0 │
+└────────────────────┴───────┴──────────────┴─────────────────┴──────────────┴──────────────┴────────────────────────┘
+                                                             MIXED TAG STATS
+┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃               Enter Tag ┃ Exit Reason ┃ Trades ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃  Win  Draw  Loss  Win% ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
+│             ('', 'roi') │             │    204 │         7.47 │         743.737 │        74.37 │      0:53:00 │  204     0     0   100 │
+│                    ('', │             │    245 │         3.68 │         438.156 │        43.82 │      0:51:00 │  227     0    18  92.7 │
+│   'trailing_stop_loss') │             │        │              │                 │              │              │                        │
+│       ('', 'stop_loss') │             │      4 │       -24.33 │         -47.684 │        -4.77 │      0:11:00 │    0     0     4     0 │
+│     ('', 'exit_cancel') │             │    263 │        -3.95 │        -502.231 │       -50.22 │      0:55:00 │   27     0   236  10.3 │
+│                   TOTAL │             │    716 │          1.8 │         631.979 │         63.2 │      0:53:00 │  458     0   258  64.0 │
+└─────────────────────────┴─────────────┴────────┴──────────────┴─────────────────┴──────────────┴──────────────┴────────────────────────┘
+                    SUMMARY METRICS
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Metric                      ┃ Value                 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Backtesting from            │ 2025-01-01 00:00:00   │
+│ Backtesting to              │ 2025-04-26 04:45:00   │
+│ Trading Mode                │ Isolated Futures      │
+│ Max open trades             │ 3                     │
+│                             │                       │
+│ Total/Daily Avg Trades      │ 716 / 6.23            │
+│ Starting balance            │ 1000 USDT             │
+│ Final balance               │ 1631.979 USDT         │
+│ Absolute profit             │ 631.979 USDT          │
+│ Total profit %              │ 63.20%                │
+│ CAGR %                      │ 373.30%               │
+│ Sortino                     │ 48.69                 │
+│ Sharpe                      │ 37.05                 │
+│ Calmar                      │ 481.10                │
+│ SQN                         │ 8.33                  │
+│ Profit factor               │ 2.08                  │
+│ Expectancy (Ratio)          │ 0.88 (0.39)           │
+│ Avg. daily profit %         │ 0.55%                 │
+│ Avg. stake amount           │ 48.436 USDT           │
+│ Total trade volume          │ 704718.571 USDT       │
+│                             │                       │
+│ Best Pair                   │ SOL/USDT:USDT 25.12%  │
+│ Worst Pair                  │ BTC/USDT:USDT 14.55%  │
+│ Best trade                  │ SOL/USDT:USDT 7.92%   │
+│ Worst trade                 │ BTC/USDT:USDT -24.61% │
+│ Best day                    │ 52.239 USDT           │
+│ Worst day                   │ -14.601 USDT          │
+│ Days win/draw/lose          │ 56 / 23 / 36          │
+│ Avg. Duration Winners       │ 0:55:00               │
+│ Avg. Duration Loser         │ 0:48:00               │
+│ Max Consecutive Wins / Loss │ 17 / 6                │
+│ Rejected Entry signals      │ 0                     │
+│ Entry/Exit Timeouts         │ 0 / 104               │
+│                             │                       │
+│ Min balance                 │ 996.996 USDT          │
+│ Max balance                 │ 1639.183 USDT         │
+│ Max % of account underwater │ 2.18%                 │
+│ Absolute Drawdown (Account) │ 2.18%                 │
+│ Absolute Drawdown           │ 27.195 USDT           │
+│ Drawdown high               │ 246.168 USDT          │
+│ Drawdown low                │ 218.973 USDT          │
+│ Drawdown Start              │ 2025-01-21 10:30:00   │
+│ Drawdown End                │ 2025-01-30 15:30:00   │
+│ Market change               │ 8.11%                 │
+└─────────────────────────────┴───────────────────────┘
 
-Backtested 2025-03-01 00:00:00 -> 2025-04-25 09:30:00 | Max open trades : 1
+Backtested 2025-01-01 00:00:00 -> 2025-04-26 04:45:00 | Max open trades : 3
                                                              STRATEGY SUMMARY
-┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
-┃                     ┃        ┃              ┃                 ┃              ┃              ┃      Win  Draw  Loss ┃                   ┃
-┃            Strategy ┃ Trades ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃                 Win% ┃          Drawdown ┃
-┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
-│ DragonSlackStrategy │     24 │        14.12 │         158.604 │        15.86 │      5:35:00 │       18     0     6 │ 3.211 USDT  0.30% │
-│                     │        │              │                 │              │              │                 75.0 │                   │
-└─────────────────────┴────────┴──────────────┴─────────────────┴──────────────┴──────────────┴──────────────────────┴───────────────────┘
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓
+┃                     ┃        ┃              ┃                 ┃              ┃              ┃     Win  Draw  Loss ┃                    ┃
+┃            Strategy ┃ Trades ┃ Avg Profit % ┃ Tot Profit USDT ┃ Tot Profit % ┃ Avg Duration ┃                Win% ┃           Drawdown ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━┩
+│ DragonSlackStrategy │    716 │         1.80 │         631.979 │         63.2 │      0:53:00 │     458     0   258 │ 27.195 USDT  2.18% │
+│                     │        │              │                 │              │              │                64.0 │                    │
+└─────────────────────┴────────┴──────────────┴─────────────────┴──────────────┴──────────────┴─────────────────────┴────────────────────┘
     """
 
     INTERFACE_VERSION = 3
     timeframe = "1d"
-    minimal_roi = {"0": 3}         # TP tối thiểu 30% (hyperopt tối ưu)
+    minimal_roi = {"0": 3, "15": 1, "30": 0.5, "40": 0.2}         # TP tối thiểu 30% (hyperopt tối ưu)
     stoploss = -0.50                  # fallback SL −50% nếu callback lỗi
-    trailing_stop = False
+    trailing_stop = True
     process_only_new_candles = True
     startup_candle_count = 20
 
