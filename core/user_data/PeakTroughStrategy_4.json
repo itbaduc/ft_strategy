@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.freqtrade.io/schema.json",
+    "max_open_trades": 10,
+    "stake_currency": "USDT",
+    "stake_amount": 10,
+    "tradable_balance_ratio": 0.99,
+    "fiat_display_currency": "USD",
+    "timeframe": "30m",
+    "dry_run": true,
+    "dry_run_wallet": 1000,
+    "trading_mode": "futures",
+    "margin_mode": "isolated",
+    "liquidation_buffer": 0.25,
+    "cancel_open_orders_on_exit": false,
+    "unfilledtimeout": {
+        "entry": 10,
+        "exit": 10,
+        "exit_timeout_count": 0,
+        "unit": "minutes"
+    },
+    "entry_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1,
+        "price_last_balance": 0.0,
+        "check_depth_of_market": {
+            "enabled": false,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exit_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1
+    },
+    "exchange": {
+        "name": "binance",
+        "key": "",
+        "secret": "",
+        "ccxt_config": {},
+        "ccxt_async_config": {},
+        "pair_whitelist": ["BTC/USDT:USDT"],
+        "pair_blacklist": []
+    },
+    "pairlists": [{ "method": "StaticPairList" }],
+    "telegram": {
+        "enabled": false,
+        "token": "your_telegram_token",
+        "chat_id": "your_telegram_chat_id"
+    },
+    "api_server": {
+        "enabled": true,
+        "listen_ip_address": "0.0.0.0",
+        "listen_port": 8080,
+        "verbosity": "error",
+        "enable_openapi": false,
+        "jwt_secret_key": "kISMYBVvVIri4hPoxg0KXrP1QrQAw3MsvfFjArfLRToqvOAwV9DmHglmC7Px",
+        "CORS_origins": [
+            "http://127.0.0.1:8080",
+            "http://localhost:8080",
+            "http://demo1.local.me:8080",
+            "*"
+        ],
+        "username": "ft",
+        "password": "ft",
+        "ws_token": "kISMYBVvVIri4hPoxg0KXrP1QrQAw3MsvfFjArfLRToqvOAwV9DmHglmC7Px"
+    },
+    "freqai": {
+        "enabled": true,
+        "fit_live_predictions_candles": 300,
+        "purge_old_models": 2,
+        "train_period_days": 100,
+        "backtest_period_days": 31,
+        "live_retrain_hours": 0.05,
+        "identifier": "PeakTroughStrategy_4",
+        "feature_parameters": {
+            "include_timeframes": ["30m"],
+            "include_corr_pairlist": ["BTC/USDT:USDT"],
+            "label_period_candles": 20,
+            "include_shifted_candles": 2,
+            "DI_threshold": 0.9,
+            "weight_factor": 0.9,
+            "principal_component_analysis": false,
+            "use_SVM_to_remove_outliers": true,
+            "indicator_periods_candles": [10, 20],
+            "plot_feature_importances": 0
+        },
+        "data_split_parameters": {
+            "test_size": 0.33,
+            "random_state": 1
+        },
+        "model_training_parameters": {},
+        "rl_config": {}
+    },
+    "bot_name": "PeakTroughStrategy_4",
+    "initial_state": "running",
+    "force_entry_enable": false,
+    "internals": {
+        "process_throttle_secs": 5,
+        "heartbeat_interval": 5
+    },
+    "strategy": "PeakTroughStrategy_4",
+    "add_config_files": []
+}
